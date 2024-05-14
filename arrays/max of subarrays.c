@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int maxSubarraySum(int arr[], int n) {
+    int max_sum = arr[0]; // Initialize max_sum with the first element of the array
+    int current_sum = arr[0]; // Initialize current_sum with the first element of the array
+
+    for (int i = 1; i < n; i++) {
+        // Update current_sum to be the maximum of the current element or
+        // the sum of the current element and the previous current_sum
+        current_sum = (arr[i] > current_sum + arr[i]) ? arr[i] : current_sum + arr[i];
+
+        // Update max_sum to be the maximum of max_sum and current_sum
+        max_sum = (max_sum > current_sum) ? max_sum : current_sum;
+    }
+
+    return max_sum;
+}
+
+int main() {
+    int n;
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter the elements of the array: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int max_sum = maxSubarraySum(arr, n);
+    printf("The maximum sum of a contiguous subarray is: %d\n", max_sum);
+
+    return 0;
+}
